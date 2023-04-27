@@ -2,7 +2,7 @@
 
 import easygui as eg
 
-cards = {
+cards = {  # Create a 2D dictionary to store the cards and their stats
     "Stoneling": {
         "Strength": 7,
         "Speed": 1,
@@ -63,4 +63,20 @@ cards = {
         "Stealth": 3,
         "Cunning": 2
     }
-    }
+}
+
+
+def welcome():  # Create a Welcome function to welcome the dvfxdxuser and ask if they want instructions
+    instructions = eg.buttonbox("Welcome to my Monster Cards Program! \n"
+                                "If you want instructions, please press {Display Instructions}\n"
+                                "If you don't want instructions, press {Skip}", "Welcome!",
+                                choices=["Display Instructions",
+                                         "Skip"])
+    if instructions == "Display Instructions":
+        eg.msgbox("You will be prompted with buttons and choices,\n"
+                  "So Please navigate through them and select the options you want.\n"
+                  "You may be asked to type in something\n"
+                  "so if that happens please type into the box provided.", "Instructions")
+
+
+welcome()
