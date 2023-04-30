@@ -1,6 +1,6 @@
 """Monster card program for AS 2.7-2.8. indev v0.2 Start on the welcome function"""
 
-import easygui as eg
+import easygui as eg  # import the easygui library for GUI and import it as eg for ease of use
 
 cards = {  # Create a 2D dictionary to store the cards and their stats
     "Stoneling": {
