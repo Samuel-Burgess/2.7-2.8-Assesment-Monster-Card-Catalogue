@@ -1,1 +1,6 @@
 This is my assessment for AS 2.7 and 2.8
+
+Patch notes for all versions below:
+
+V0.1 - created the Dictionary to store the monster cards
+V0.2 - Created the welcome function, including instructions
