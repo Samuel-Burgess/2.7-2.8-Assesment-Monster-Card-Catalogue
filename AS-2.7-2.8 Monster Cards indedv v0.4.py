@@ -79,18 +79,19 @@ def welcome():  # Create a Welcome function to welcome the user and ask if they 
                   "so if that happens please type into the box provided.", "Instructions")
 
 
-def main_menu():  # create the main menu function that will be called upon in multiple occasions in the program
+def main_menu():  # create the main menu function th
+    # at will be called upon in multiple occasions in the program
     choice = eg.buttonbox("What do you want to do?", "Main Menu",  # use a buttonbox to ask user for choice
                           choices=["Add Cards", "Search for cards", "Delete cards",
                                    "Print cards to console"])
     if choice == "Add Cards":
-        print("add cards")
+        print("add cards")  # Placeholder for the add_cards() function
     elif choice == "Search for cards":
-        print("search for cards")
+        print("search for cards")  # Placeholder for the find_cards() function
     elif choice == "Delete cards":
-        print("Delete cards")
+        print("Delete cards")  # Placeholder for the delete_cards() function
     elif choice == "Print cards to console":
-        print("print cards")
+        print("print cards")  # Placeholder for the print_cards() function
 
 
 welcome()
