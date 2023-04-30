@@ -1,4 +1,4 @@
-"""Monster card program for AS 2.7-2.8. indev v0.3 Start on the main menu function"""
+"""Monster card program for AS 2.7-2.8. indev v0.3 Start on the main menu function and trial it"""
 
 import easygui as eg  # import the easygui library for GUI and import it as eg for ease of use
 
@@ -79,9 +79,34 @@ def welcome():  # Create a Welcome function to welcome the user and ask if they 
                   "so if that happens please type into the box provided.", "Instructions")
 
 
-def main_menu():  # create the main menu function that will be called upon in multiple occasions in the program
-    
+def main_menu_1():  # create the main menu function that will be called upon in multiple occasions in the program
+    choice = eg.buttonbox("What do you want to do?", "Main Menu",  # use a buttonbox to ask user for choice
+                          choices=["Add Cards", "Search for cards", "Delete cards",
+                                   "Print cards to console"])
+    if choice == "Add Cards":
+        print("add cards")
+    elif choice == "Search for cards":
+        print("search for cards")
+    elif choice == "Delete cards":
+        print("Delete cards")
+    elif choice == "Print cards to console":
+        print("print cards")
 
+
+def main_menu_2():  # create the main menu function that will be called upon in multiple occasions in the program
+    choice = eg.choicebox("What do you want to do?", "Main Menu",  # use a choice box to ask the user for choice
+                          choices=["Add Cards", "Search for cards", "Delete cards",
+                                   "Print cards to console"])
+    if choice == "Add Cards":
+        print("add cards")
+    elif choice == "Search for cards":
+        print("search for cards")
+    elif choice == "Delete cards":
+        print("Delete cards")
+    elif choice == "Print cards to console":
+        print("print cards")
 
 
 welcome()
+main_menu_1()
+main_menu_2()
