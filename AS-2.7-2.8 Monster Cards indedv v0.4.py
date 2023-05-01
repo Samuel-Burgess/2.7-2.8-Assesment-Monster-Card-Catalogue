@@ -1,4 +1,4 @@
-"""Monster card program for AS 2.7-2.8. indev v0.3 Finish the main menu function, cont. w/ trial 1"""
+"""Monster card program for AS 2.7-2.8. indev v04 Finish the main menu function, cont. w/ trial 1"""
 
 import easygui as eg  # import the easygui library for GUI and import it as eg for ease of use
 
