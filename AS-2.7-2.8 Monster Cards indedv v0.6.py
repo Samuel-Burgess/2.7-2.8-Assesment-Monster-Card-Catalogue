@@ -87,7 +87,7 @@ def main_menu():  # create the main menu function that will be called upon multi
     if choice == "Add Cards":
         new_card = add_cards()
         cards |= new_card  # add the returned value of the add_cards function to the cards dictionary
-        edit_card(new_card)  # edit the newly made card
+        edit_card(cards.get(new_card))  # edit the newly made card
         main_menu()  # call main menu again
     elif choice == "Search for cards":
         print("search for cards")  # Placeholder for the find_cards() function
@@ -110,8 +110,36 @@ def add_cards():  # add cards function gets the user to create a monster card th
     return {card_name: new_card}  # Return the dictionary of the newest card
 
 
-def edit_card(card):
-    
+def edit_card(card_name):
+    while True:
+        card = cards[card_name]
+        msg = f"The card you are currently editing is {card_name}\n\n"
+        msg += f"Strength:\t {card['Strength']}"
+        msg += f"Speed:   \t {card['Speed']}"
+        msg += f"Stealth: \t {card['Stealth']}"
+        msg += f"Cunning: \t {card['Cunning']}"
+        eg.msgbox(msg, f"Edit {card_name}")
+        choice = eg.buttonbox("What would you like to edit?", "Editing Menu",
+                              choices=["Edit stat", "Change name", "Exit"])
+        if choice == "Edit stat":
+            attribute = eg.choicebox("What stat will you edit?", "Edit Stat",
+                                     choices=["Strength", "Speed", "Stealth", "Cunning"])
+            card[attribute] = eg.integerbox(f"What will be {card_name}'s {attribute}?", "Assign Value", upperbound=25,
+                                            lowerbound=1)
+            edit_card(card_name)
+        elif choice == "Change name":
+            new_card_name = ""
+            while new_card_name == "":
+                new_card_name = str(eg.enterbox("Please enter the new name for the card", "New Name"))
+            if new_card_name in cards:
+                eg.msgbox(f"There is already a card named {new_card_name}, please enter a new name",
+                          "Card already exists")
+                new_card_name = ""
+            cards[new_card_name] = cards.pop(card_name)
+            card_name = new_card_name
+            edit_card(card_name)
+        else:
+            main_menu()
 
 
 welcome()
