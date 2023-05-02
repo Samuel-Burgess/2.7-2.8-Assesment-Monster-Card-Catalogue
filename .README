@@ -6,4 +6,4 @@ V0.1 - created the Dictionary to store the monster cards
 V0.2 - Created the welcome function, including instructions
 V0.3 - Created main menu function, and trialled it
 V0.4 - cont. developing trial 1 of Main Menu Function
-V0.5 - created the add_cards function
+V0.5 - created the add_cards function, added exit option to main menu
