@@ -79,19 +79,34 @@ def welcome():  # Create a Welcome function to welcome the user and ask if they 
                   "so if that happens please type into the box provided.", "Instructions")
 
 
-def main_menu():  # create the main menu function th
+def main_menu():  # create the main menu function that will be called upon multiple times
+    global cards
     # at will be called upon in multiple occasions in the program
     choice = eg.buttonbox("What do you want to do?", "Main Menu",  # use a buttonbox to ask user for choice
                           choices=["Add Cards", "Search for cards", "Delete cards",
-                                   "Print cards to console"])
+                                   "Print cards to console", "Exit"])
     if choice == "Add Cards":
-        print("add cards")  # Placeholder for the add_cards() function
+        cards |= add_cards()  # add the returned value of the add_cards function to the cards dictionary
+        main_menu()  # call main menu again
     elif choice == "Search for cards":
         print("search for cards")  # Placeholder for the find_cards() function
     elif choice == "Delete cards":
         print("Delete cards")  # Placeholder for the delete_cards() function
     elif choice == "Print cards to console":
-        print("print cards")  # Placeholder for the print_cards() function
+        print(cards)  # Placeholder for the print_cards() function, printing the dictionary for testing purposes
+    else:
+        print("exit")
+
+
+def add_cards():
+    card_name = str(eg.enterbox("Please enter the name of the card you are adding:", "Add Card"))
+    new_card = {}
+    stats = ["Strength", "Speed", "Stealth", "Cunning"]
+    for item in stats:
+        value = eg.integerbox(f"Please enter the value for {card_name}'s {item}", "Enter stat value", upperbound=25,
+                              lowerbound=1)
+        new_card[item] = value
+    return {card_name: new_card}  # Return the dictionary of the newest card
 
 
 welcome()
