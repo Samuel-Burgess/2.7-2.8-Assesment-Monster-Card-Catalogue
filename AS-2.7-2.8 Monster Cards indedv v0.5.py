@@ -98,14 +98,14 @@ def main_menu():  # create the main menu function that will be called upon multi
         print("exit")
 
 
-def add_cards():
-    card_name = str(eg.enterbox("Please enter the name of the card you are adding:", "Add Card"))
-    new_card = {}
-    stats = ["Strength", "Speed", "Stealth", "Cunning"]
+def add_cards():  # add cards function gets the user to create a monster card then returns that card
+    card_name = str(eg.enterbox("Please enter the name of the card you are adding:", "Add Card"))  # user inputs name
+    new_card = {}  # create the new card's dictionary
+    stats = ["Strength", "Speed", "Stealth", "Cunning"]  # define the stats that will be given values
     for item in stats:
         value = eg.integerbox(f"Please enter the value for {card_name}'s {item}", "Enter stat value", upperbound=25,
-                              lowerbound=1)
-        new_card[item] = value
+                              lowerbound=1)  # go through each stat getting the user to enter a value
+        new_card[item] = value  # add the stat and value to the dictionary
     return {card_name: new_card}  # Return the dictionary of the newest card
 
 
