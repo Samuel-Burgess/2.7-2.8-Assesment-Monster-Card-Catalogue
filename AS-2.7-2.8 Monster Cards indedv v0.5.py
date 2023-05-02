@@ -81,12 +81,13 @@ def welcome():  # Create a Welcome function to welcome the user and ask if they 
 
 def main_menu():  # create the main menu function that will be called upon multiple times
     global cards
-    # at will be called upon in multiple occasions in the program
     choice = eg.buttonbox("What do you want to do?", "Main Menu",  # use a buttonbox to ask user for choice
                           choices=["Add Cards", "Search for cards", "Delete cards",
                                    "Print cards to console", "Exit"])
     if choice == "Add Cards":
-        cards |= add_cards()  # add the returned value of the add_cards function to the cards dictionary
+        new_card = add_cards()
+        cards |= new_card  # add the returned value of the add_cards function to the cards dictionary
+        edit_card(new_card)  # edit the newly made card
         main_menu()  # call main menu again
     elif choice == "Search for cards":
         print("search for cards")  # Placeholder for the find_cards() function
