@@ -116,29 +116,28 @@ def add_cards():  # add cards function gets the user to create a monster card th
 def edit_card(card_name):
     while True:
         card = cards[card_name]
-        msg = f"The card you are currently editing is {card_name}\n\n"
+        msg = f"The card you are currently editing is {card_name}\n\n"  # create the message for the first dialogue box
         msg += f"Strength:\t {card['Strength']}\n"
         msg += f"Speed:   \t {card['Speed']}\n"
         msg += f"Stealth: \t {card['Stealth']}\n"
         msg += f"Cunning: \t {card['Cunning']}\n"
         eg.msgbox(msg, f"Edit {card_name}")
-        choice = eg.buttonbox("What would you like to edit?", "Editing Menu",
+        choice = eg.buttonbox("What would you like to edit?", "Editing Menu",  # editing menu
                               choices=["Edit stat", "Change name", "Exit"])
         if choice == "Edit stat":
-            attribute = eg.choicebox("What stat will you edit?", "Edit Stat",
+            attribute = eg.choicebox("What stat will you edit?", "Edit Stat",  # stat editing code
                                      choices=["Strength", "Speed", "Stealth", "Cunning"])
             card[attribute] = eg.integerbox(f"What will be {card_name}'s {attribute}?", "Assign Value", upperbound=25,
                                             lowerbound=1)
         elif choice == "Change name":
             new_card_name = ""
-            while new_card_name == "":
+            while new_card_name == "":  # name change code
                 new_card_name = str(eg.enterbox("Please enter the new name for the card", "New Name"))
-            if new_card_name in cards:
-                eg.msgbox(f"There is already a card named {new_card_name}, please enter a new name",
-                          "Card already exists")
-                new_card_name = ""
-            cards[new_card_name] = cards.pop(card_name)
-            card_name = new_card_name
+                if new_card_name in cards:  # check for duplicates
+                    eg.msgbox(f"There is already a card named {new_card_name}, please enter a new name",
+                              "Card already exists")
+                    new_card_name = ""
+            card_name = new_card_name  # change name of card to the new name
         else:
             break
 
