@@ -1,4 +1,5 @@
-"""Monster card program for AS 2.7-2.8. indev v05 Start on the edit cards function."""
+"""Monster card program for AS 2.7-2.8. indev v05 Start on the edit cards function.
+Added a blank checker for add cards function."""
 
 import easygui as eg  # import the easygui library for GUI and import it as eg for ease of use
 
@@ -85,9 +86,7 @@ def main_menu():  # create the main menu function that will be called upon multi
                           choices=["Add Cards", "Search for cards", "Delete cards",
                                    "Print cards to console", "Exit"])
     if choice == "Add Cards":
-        new_card = add_cards()
-        cards |= new_card  # add the returned value of the add_cards function to the cards dictionary
-        edit_card(cards.get(new_card))  # edit the newly made card
+        edit_card(add_cards())
         main_menu()  # call main menu again
     elif choice == "Search for cards":
         print("search for cards")  # Placeholder for the find_cards() function
@@ -100,24 +99,28 @@ def main_menu():  # create the main menu function that will be called upon multi
 
 
 def add_cards():  # add cards function gets the user to create a monster card then returns that card
-    card_name = str(eg.enterbox("Please enter the name of the card you are adding:", "Add Card"))  # user inputs name
+    global cards
+    card_name = ""
+    while card_name == "":
+        card_name = str(eg.enterbox("Please enter the name of the card you are adding :", "Add Card"))
     new_card = {}  # create the new card's dictionary
     stats = ["Strength", "Speed", "Stealth", "Cunning"]  # define the stats that will be given values
     for item in stats:
         value = eg.integerbox(f"Please enter the value for {card_name}'s {item}", "Enter stat value", upperbound=25,
                               lowerbound=1)  # go through each stat getting the user to enter a value
         new_card[item] = value  # add the stat and value to the dictionary
-    return {card_name: new_card}  # Return the dictionary of the newest card
+    cards |= {card_name: new_card}  # add the new card to the main dictionary
+    return card_name
 
 
 def edit_card(card_name):
     while True:
         card = cards[card_name]
         msg = f"The card you are currently editing is {card_name}\n\n"
-        msg += f"Strength:\t {card['Strength']}"
-        msg += f"Speed:   \t {card['Speed']}"
-        msg += f"Stealth: \t {card['Stealth']}"
-        msg += f"Cunning: \t {card['Cunning']}"
+        msg += f"Strength:\t {card['Strength']}\n"
+        msg += f"Speed:   \t {card['Speed']}\n"
+        msg += f"Stealth: \t {card['Stealth']}\n"
+        msg += f"Cunning: \t {card['Cunning']}\n"
         eg.msgbox(msg, f"Edit {card_name}")
         choice = eg.buttonbox("What would you like to edit?", "Editing Menu",
                               choices=["Edit stat", "Change name", "Exit"])
@@ -126,7 +129,6 @@ def edit_card(card_name):
                                      choices=["Strength", "Speed", "Stealth", "Cunning"])
             card[attribute] = eg.integerbox(f"What will be {card_name}'s {attribute}?", "Assign Value", upperbound=25,
                                             lowerbound=1)
-            edit_card(card_name)
         elif choice == "Change name":
             new_card_name = ""
             while new_card_name == "":
@@ -137,9 +139,8 @@ def edit_card(card_name):
                 new_card_name = ""
             cards[new_card_name] = cards.pop(card_name)
             card_name = new_card_name
-            edit_card(card_name)
         else:
-            main_menu()
+            break
 
 
 welcome()
