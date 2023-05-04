@@ -7,3 +7,4 @@ V0.2 - Created the welcome function, including instructions
 V0.3 - Created main menu function, and trialled it
 V0.4 - cont. developing trial 1 of Main Menu Function
 V0.5 - created the add_cards function, added exit option to main menu
+V0.6 - added edit cards function, adjusted add cards function

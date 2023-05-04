@@ -1,4 +1,4 @@
-"""Monster card program for AS 2.7-2.8. indev v05 Start on the edit cards function.
+"""Monster card program for AS 2.7-2.8. indev v06 Start on the edit cards function.
 Added a blank checker for add cards function."""
 
 import easygui as eg  # import the easygui library for GUI and import it as eg for ease of use
