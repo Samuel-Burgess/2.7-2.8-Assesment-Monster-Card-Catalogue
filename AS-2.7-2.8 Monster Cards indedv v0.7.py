@@ -79,14 +79,15 @@ def welcome():  # Create a Welcome function to welcome the user and ask if they 
                   "so if that happens please type into the box provided.", "Instructions")
 
 
-def main_menu():  # create the main menu function that will be called upon multiple times
+def main_menu():
     global cards
-    choice = eg.buttonbox("What do you want to do?", "Main Menu",  # use a buttonbox to ask user for choice
+    choice = eg.buttonbox("What do you want to do?", "Main Menu",
                           choices=["Add Cards", "Search for cards", "Delete cards",
                                    "Print cards to console", "Exit"])
     if choice == "Add Cards":
-        edit_card(add_cards())
-        main_menu()  # call main menu again
+        card_name = add_cards()  # Get the new card name from add_cards()
+        edit_card(card_name)  # Pass the card name to edit_card()
+        main_menu()  # Call the main menu again
     elif choice == "Search for cards":
         print("search for cards")  # Placeholder for the find_cards() function
     elif choice == "Delete cards":
@@ -100,7 +101,7 @@ def main_menu():  # create the main menu function that will be called upon multi
 def add_cards():  # add cards function gets the user to create a monster card then returns that card
     global cards
     card_name = None
-    while card_name is None:
+    while card_name is None or card_name.strip() == "":
         card_name = eg.enterbox("Please enter the name of the card you are adding:", "Add Card")
     new_card = {}  # create the new card's dictionary
     stats = ["Strength", "Speed", "Stealth", "Cunning"]  # define the stats that will be given values
@@ -116,6 +117,8 @@ def add_cards():  # add cards function gets the user to create a monster card th
 
 
 def edit_card(card_name):
+    original_card_name = card_name  # Store the original card name
+
     while True:
         card = cards[card_name]
         msg = f"The card you are currently editing is {card_name}\n\n"  # create the message for the first dialogue box
@@ -124,25 +127,37 @@ def edit_card(card_name):
         msg += f"Stealth: \t {card['Stealth']}\n"
         msg += f"Cunning: \t {card['Cunning']}\n"
         eg.msgbox(msg, f"Edit {card_name}")
-        choice = eg.buttonbox("What would you like to edit?", "Editing Menu",  # editing menu
+
+        choice = eg.buttonbox("What would you like to edit?", "Editing Menu",
                               choices=["Edit stat", "Change name", "Exit"])
+
         if choice == "Edit stat":
-            attribute = eg.choicebox("What stat will you edit?", "Edit Stat",  # stat editing code
+            attribute = eg.choicebox("What stat will you edit?", "Edit Stat",
                                      choices=["Strength", "Speed", "Stealth", "Cunning"])
             if attribute is None:
                 eg.msgbox("Cancelled stat edit")
             else:
                 card[attribute] = eg.integerbox(f"What will be {card_name}'s {attribute}?", "Assign Value",
                                                 upperbound=25, lowerbound=1)
+
         elif choice == "Change name":
             new_card_name = None
-            while new_card_name is None:  # name change code
+            while new_card_name is None or new_card_name.strip() == "":
                 new_card_name = eg.enterbox("Please enter the new name for the card", "New Name")
-                if new_card_name in cards and new_card_name != card_name:  # check for duplicates
-                    eg.msgbox(f"There is already a card named {new_card_name}, please enter a new name",
+                if new_card_name == original_card_name:
+                    eg.msgbox("The new name is the same as the current name. Please enter a different name.",
+                              "Invalid Name")
+                    new_card_name = None
+                elif new_card_name in cards:
+                    eg.msgbox(f"There is already a card named {new_card_name}. Please enter a new name.",
                               "Card already exists")
                     new_card_name = None
-            card_name = new_card_name  # change name of card to the new name
+                elif new_card_name.strip() != "":
+                    cards[new_card_name] = cards.pop(card_name)  # Update the card name in the dictionary
+                    card_name = new_card_name  # Update the current card name variable
+                else:
+                    eg.msgbox("Please enter a valid name", "Enter a valid name")
+
         else:
             break
 
