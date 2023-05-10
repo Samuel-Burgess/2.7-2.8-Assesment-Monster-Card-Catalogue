@@ -99,7 +99,7 @@ def main_menu():
     elif choice == "Delete cards":
         delete_card()
     elif choice == "Print cards to console":
-        print(cards)  # Placeholder for the print_cards() function, printing the dictionary for testing purposes
+        print_cards()
     else:
         print("exit")
 
@@ -190,7 +190,20 @@ def delete_card():
 
 
 def print_cards():
-    
+    print("Monster Cards:")
+    print("-------------------")
+
+    for card_name, card_stats in cards.items():
+        print(f"Card: {card_name}")
+        print("Stats:")
+        print(f"  Strength: {card_stats['Strength']}")
+        print(f"  Speed: {card_stats['Speed']}")
+        print(f"  Stealth: {card_stats['Stealth']}")
+        print(f"  Cunning: {card_stats['Cunning']}")
+        print("-------------------")
+
+    print("End of Monster Cards")
+
 
 
 welcome()
