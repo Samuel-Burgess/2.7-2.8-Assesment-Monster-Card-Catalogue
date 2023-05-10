@@ -173,6 +173,13 @@ def find_cards():
     while card_name is None or card_name.strip() == "":
         card_name = eg.enterbox("What card do you want to find", "Find Card")
         if card_name in cards:
+            card = cards[card_name]
+            msg = f"The card you have found is {card_name}\n\n"  # create the message for the first dialogue box
+            msg += f"Strength:\t {card['Strength']}\n"
+            msg += f"Speed:   \t {card['Speed']}\n"
+            msg += f"Stealth: \t {card['Stealth']}\n"
+            msg += f"Cunning: \t {card['Cunning']}\n"
+            eg.msgbox(msg, f"Found {card_name}")
             return card_name
         else:
             eg.msgbox(f"There is no {card_name} card, please enter an existing card", "Error")
@@ -203,7 +210,6 @@ def print_cards():
         print("-------------------")
 
     print("End of Monster Cards")
-
 
 
 welcome()
