@@ -89,7 +89,12 @@ def main_menu():
         edit_card(card_name)  # Pass the card name to edit_card()
         main_menu()  # Call the main menu again
     elif choice == "Search for cards":
-        edit_card(find_cards())
+        card_name = find_cards()
+        if eg.buttonbox(f"Do you want to edit {card_name} or do you want to delete it?", "Edit or delete",
+                        choices=["Edit, delete"]) == "Edit":
+            edit_card(card_name)
+        else:
+            delete_card(card_name)
     elif choice == "Delete cards":
         print("Delete cards")  # Placeholder for the delete_cards() function
     elif choice == "Print cards to console":
