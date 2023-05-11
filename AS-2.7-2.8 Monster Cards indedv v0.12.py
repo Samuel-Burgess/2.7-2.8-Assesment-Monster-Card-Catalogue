@@ -118,6 +118,9 @@ def main_menu():
         if save_y_n == "Yes":
             with open('cards_dictionary.pickle', 'wb') as handle:
                 pickle.dump(cards, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            eg.msgbox("Data saved", "Data saved")
+        else:
+            eg.msgbox("Data not saved", "Data not saved")
 
 
 def add_cards():  # add cards function gets the user to create a monster card then returns that card
