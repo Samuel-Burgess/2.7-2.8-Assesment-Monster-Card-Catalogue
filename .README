@@ -12,3 +12,5 @@ V0.7 - Updated None checkers and did some debugging
 V0.8 - Added the search for cards function and debugged it
 V0.9 - Added and debugged the delete cards function
 V0.10 - added the print cards function
+V0.11 - Trialled saving data
+V0.12 - debugging and clarity of messages
