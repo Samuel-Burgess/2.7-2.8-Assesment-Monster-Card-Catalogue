@@ -146,7 +146,8 @@ def add_cards():  # add cards function gets the user to create a monster card th
         stats = ["Strength", "Speed", "Stealth", "Cunning"]  # define the stats that will be given values
         for item in stats:
             while True:
-                value = eg.integerbox(f"Please enter the value for {card_name}'s {item}", "Enter stat value",
+                value = eg.integerbox(f"Please enter the value for {card_name}'s {item}, (min 1, max 25)",
+                                      "Enter stat value",
                                       upperbound=25,
                                       lowerbound=1)  # go through each stat getting the user to enter a value
                 if value is not None:
