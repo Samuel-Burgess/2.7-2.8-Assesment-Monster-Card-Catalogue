@@ -1,4 +1,4 @@
-"""Monster card program for AS 2.7-2.8. indev v012 Debugging and making messages clearer."""
+"""Monster card program for AS 2.7-2.8. indev v013 Edited find cards so that it uses a choicebox."""
 
 import easygui as eg  # import the easygui library for GUI and import it as eg for ease of use
 import pickle
@@ -107,12 +107,17 @@ def main_menu():
         if card_name is None:
             main_menu()
         else:
-            if eg.buttonbox(f"Do you want to edit {card_name} or do you want to delete it?", "Edit or delete",
-                            choices=["Edit", "delete"]) == "Edit":
+            user_choice = eg.buttonbox(f"Do you want to edit {card_name} or do you want to delete it?",
+                                       "Edit or delete",
+                                       choices=["Edit", "delete", "Cancel"])
+            if user_choice == "Edit":
                 edit_card(card_name)
                 main_menu()
-            else:
+            elif user_choice == "delete":
                 del cards[card_name]
+                main_menu()
+            else:
+                eg.msgbox("Returning to menu", "Return to menu")
                 main_menu()
 
     elif choice == "Delete cards":
@@ -198,9 +203,9 @@ def edit_card(card_name):
 
 
 def find_cards():
-    while True:
-        card_name = eg.enterbox("What card do you want to find?", "Find Card")
-        if card_name in cards:
+    if len(cards) > 0:
+        card_name = eg.choicebox("What card do you want to find?", "Find Card", choices=list(cards.keys()))
+        if card_name is not None:
             card = cards[card_name]
             msg = f"The card you have found is {card_name}\n\n"
             msg += f"Strength:\t {card['Strength']}\n"
@@ -209,15 +214,15 @@ def find_cards():
             msg += f"Cunning: \t {card['Cunning']}\n"
             eg.msgbox(msg, f"Found {card_name}")
             return card_name
-        elif card_name is None:
+        else:
             eg.msgbox("Cancelled search", "Cancelled search")
             return None
-        else:
-            eg.msgbox(f"There is no {card_name} card. Please check your spelling.", "Error")
+    else:
+        eg.msgbox("No cards to find.", "Error")
 
 
 def delete_card():
-    if cards is not None:
+    if len(cards) > 0:
         card_name = eg.choicebox("Choose a card to delete:", "Delete Card", choices=list(cards.keys()))
         if card_name is not None:
             del cards[card_name]
