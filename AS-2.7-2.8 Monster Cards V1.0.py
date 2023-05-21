@@ -1,6 +1,6 @@
 """Monster card program for AS 2.7-2.8 V1.0."""
 
-import easygui as eg  # import the easygui library for GUI and import it as eg for ease of use
+import easygui as eg  # import the easygui library for GUI and import it as e.g. for ease of use
 import pickle
 
 cards = {  # Create a 2D dictionary to store the cards and their stats
@@ -201,7 +201,7 @@ def edit_card(card_name):
 
 
 def find_cards():
-    if len(cards) > 0:  # make sure there are cards to find, then list all cards and put them in a choicebox
+    if len(cards) > 0:  # make sure there are cards to find, then list all cards and put them in a choice-box
         card_name = eg.choicebox("What card do you want to find?", "Find Card", choices=list(cards.keys()))
         if card_name is not None:
             card = cards[card_name]  # format message
@@ -220,7 +220,7 @@ def find_cards():
 
 
 def delete_card():
-    if len(cards) > 0:  # check if there are cards to delete, make a choicebox of all the cards
+    if len(cards) > 0:  # check if there are cards to delete, make a choice-box of all the cards
         card_name = eg.choicebox("Choose a card to delete:", "Delete Card", choices=list(cards.keys()))
         if card_name is not None:
             del cards[card_name]  # delete chosen card
